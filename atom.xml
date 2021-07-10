@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://fqd511.github.io</id>
+    <id>https://fanqidi.github.io</id>
     <title>大愚乌托邦</title>
-    <updated>2021-05-01T07:46:21.489Z</updated>
+    <updated>2021-07-10T03:45:59.499Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://fqd511.github.io"/>
-    <link rel="self" href="https://fqd511.github.io/atom.xml"/>
+    <link rel="alternate" href="https://fanqidi.github.io"/>
+    <link rel="self" href="https://fanqidi.github.io/atom.xml"/>
     <subtitle>无处可去，当个观众</subtitle>
-    <logo>https://fqd511.github.io/images/avatar.png</logo>
-    <icon>https://fqd511.github.io/favicon.ico</icon>
+    <logo>https://fanqidi.github.io/images/avatar.png</logo>
+    <icon>https://fanqidi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 大愚乌托邦</rights>
     <entry>
         <title type="html"><![CDATA[React 项目的打包优化]]></title>
-        <id>https://fqd511.github.io/post/cra-accelerate/</id>
-        <link href="https://fqd511.github.io/post/cra-accelerate/">
+        <id>https://fanqidi.github.io/post/cra-accelerate/</id>
+        <link href="https://fanqidi.github.io/post/cra-accelerate/">
         </link>
         <updated>2021-05-01T05:51:49.000Z</updated>
         <summary type="html"><![CDATA[<p>本文介绍基于 <code>create-react-app</code>的 <code>react</code>项目的编译优化经验，成功将编译打包时间由 <code>2 min 20 s</code> 左右降低至 <code>1 min 20 s</code> 左右</p>
@@ -23,8 +23,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[一种数据驱动的 debug 思路]]></title>
-        <id>https://fqd511.github.io/post/nxryld17R/</id>
-        <link href="https://fqd511.github.io/post/nxryld17R/">
+        <id>https://fanqidi.github.io/post/nxryld17R/</id>
+        <link href="https://fanqidi.github.io/post/nxryld17R/">
         </link>
         <updated>2021-03-22T13:13:08.000Z</updated>
         <summary type="html"><![CDATA[<p>有时候遇到bug，时间上来不及找到bug出现的原因，这时候从数据驱动的角度出发，也许能另辟蹊径。</p>
@@ -34,8 +34,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[深度优先，还是 广度优先？]]></title>
-        <id>https://fqd511.github.io/post/life-choice/</id>
-        <link href="https://fqd511.github.io/post/life-choice/">
+        <id>https://fanqidi.github.io/post/life-choice/</id>
+        <link href="https://fanqidi.github.io/post/life-choice/">
         </link>
         <updated>2021-03-20T12:24:41.000Z</updated>
         <summary type="html"><![CDATA[<p>“深度优先”和“广度优先”是遍历树/图中的算法名词，本文借用这两个概念，来表达对学习方法的个人看法。</p>
@@ -45,8 +45,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Tile Map System | 瓦片地图]]></title>
-        <id>https://fqd511.github.io/post/Tile Map System _ 瓦片地图/</id>
-        <link href="https://fqd511.github.io/post/Tile Map System _ 瓦片地图/">
+        <id>https://fanqidi.github.io/post/Tile Map System _ 瓦片地图/</id>
+        <link href="https://fanqidi.github.io/post/Tile Map System _ 瓦片地图/">
         </link>
         <updated>2020-01-31T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>瓦片地图就是在渲染地图时将地图切割成多个小块，以便检索和显示，因为切割方式形似瓦片（Tile），故称为瓦片地图（Map Tile System）。说人话就是对地图进行网格化处理，本文主要内容包括瓦片地图使用的投影方式、坐标体系等</p>
