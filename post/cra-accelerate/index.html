@@ -1,0 +1,394 @@
+
+<html>
+  <head lang="zh">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+        <meta content="yes" name="apple-mobile-web-app-capable"/>
+        <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+        <meta content="telephone=no" name="format-detection"/>
+        <meta name="renderer" content="webkit">
+    <title>React 项目的打包优化 | 大愚乌托邦</title>
+<link href="https://fanqidi.github.io/styles/main.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="https://fanqidi.github.io/media/scripts/jquery.js"></script>
+<script type="text/javascript" src="https://fanqidi.github.io/media/scripts/basic.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </head>
+
+  <body>
+     <div class="header">
+      <div class="logo_title">
+		  
+        <div class="title animated fadeInDown"><img src="https://fanqidi.github.io/images/avatar.png?v=1714889770369"/>
+
+          <h1 title="大愚乌托邦" class="weaklink"><a href="/">大愚乌托邦</a>
+
+          </h1>
+
+          <div class="navbar weaklink">
+            <div class="normal_nav">
+
+<div class="bitcron_nav_container">
+
+
+  <div class="bitcron_nav">
+    <div class="mixed_site_nav_wrap site_nav_wrap">
+		
+      <ul class="mixed_site_nav site_nav sm sm-base">
+ 
+  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a>
+
+  </li>
+ 
+  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a>
+
+  </li>
+ 
+  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a>
+
+  </li>
+ 
+
+      </ul>
+
+      <div class="clear clear_nav_inline_end"></div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="clear clear_nav_end"></div>
+
+</div>
+
+            </div>
+
+            <div class="hamberger"><i class="fa fa-bars"></i>
+<i class="fa fa-times"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="hidden_nav animated fadeInDown">
+
+<div class="bitcron_nav_container">
+
+
+  <div class="bitcron_nav">
+    <div class="mixed_site_nav_wrap site_nav_wrap">
+      <ul class="mixed_site_nav site_nav sm sm-base">
+		  
+	
+  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a>
+
+  </li>
+
+
+  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a>
+
+  </li>
+
+
+  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a>
+
+  </li>
+
+
+
+
+
+      </ul>
+
+      <div class="clear clear_nav_inline_end"></div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="clear clear_nav_end"></div>
+
+</div>
+
+      </div>
+
+    </div>
+
+
+    <div class="main">
+      <div class="main-inner">
+
+
+<div class="content">
+
+
+
+
+
+
+  <div class="post_page" >
+
+<div class="post">
+  <div class="post_title sm_margin">
+    <h2><a>React 项目的打包优化</a>
+
+
+
+    </h2>
+  </div>
+
+  <div class="post_details">
+    <div class="info"><i class="fa fa-clock-o"></i>
+<span class="date_info">2021-05-01</span>
+<i class="fa fa-eye"></i>
+
+<span class="date_info"><span id="busuanzi_value_page_pv"></span> Views</span>
+
+
+<i class="fa fa-bookmark-o"></i>
+<span class="tags_info weaklink">
+	
+	<a href="https://fanqidi.github.io/tag/SX7YAE2bn/" class="tag">react</a>
+
+	<a href="https://fanqidi.github.io/tag/NM9SNHSzEx/" class="tag">webpack</a>
+
+	<a href="https://fanqidi.github.io/tag/mt6FJiYFw/" class="tag">tech</a>
+
+
+</span>
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="post_content markdown"><p class="md_block">
+    <span class="md_line md_line_start md_line_end"><p>本文介绍基于 <code>create-react-app</code>的 <code>react</code>项目的编译优化经验，成功将编译打包时间由 <code>2 min 20 s</code> 左右降低至 <code>1 min 20 s</code> 左右</p>
+<!-- more -->
+<p> </p>
+<h2 id="简介">简介</h2>
+<p> <br>
+最近因工作原因需要优化一个 <code>react</code> 项目，当前的开发环境下编译时间约为 2 分多钟，每次代码修改等待页面刷新都比较慢，因此效率比较低，此为前提。<br>
+ </p>
+<h2 id="问题分析">问题分析</h2>
+<p> <br>
+该项目是一个使用<code>cra</code>（<code>create-react-app</code>）创建的项目，而 <code>cra</code> 使用<code>webpack</code>打包，所以问题的本质即为分析优化<code>webpack</code>的打包编译过程，思路分为三步走：<br>
+ <br>
+1. 分析耗时与产出物体积确定瓶颈<br>
+2. 针对性的选择优化方案<br>
+3. 覆盖<code>cra</code>的<code>webpack</code>配置进行测试<br>
+ </p>
+<h2 id="过程">过程</h2>
+<p> </p>
+<h3 id="1-时间与体积分析">1. 时间与体积分析：</h3>
+<p> <br>
+<strong>体积分析</strong>可以使用<code>source-map-explorer</code>这个工具，安装之后运行命令：<br>
+ </p>
+<pre><code class="language-shell">// 这里通过参数指定了目录和生成的结果文件
+npm run build &amp;&amp; source-map-explorer 'build/static/js/*.js' --html result.html
+</code></pre>
+<p> <br>
+查看输出结果，发现<code>node_modules</code>打包体积占了很大部分，但具体耗时不确定。</p>
+<p> <br>
+<strong>时间分析</strong>可以考虑<code>webpack</code>插件，<code>webpack</code>在编译打包生命周期的一些节点上提供了钩子函数，可以考虑自己针对性的编写一个插件或者寻找现有插件，简单在社区找一下发现可以使用<code>speed-measure-plugin</code>，下面是耗时分析结果（多次运行结果相近）：<br>
+ <br>
+运行<code>start</code>本地起开发服务：<br>
+<img src="https://ae01.alicdn.com/kf/U5a345a2d47b94482b23927d1d5b9e6e7S.jpg" alt="" loading="lazy"><br>
+ <br>
+运行<code>build</code>输出构建包<br>
+<img src="https://ae01.alicdn.com/kf/U7777c75a6b5b409fbffaeffe9604c39cD.jpg" alt="" loading="lazy"><br>
+ <br>
+可以看到，时间花的较长的部分（红色字体）主要是<code>babel-loader</code>对<code>js</code>的转译，以及less代码的编译&amp;预处理；另外在开发环境下，为了避免因为大小写错误导致代码内容变动监听不到的问题，<code>cra</code>内置了一个插件<code>CaseSensitivePathsPlugin</code>，这个插件会遍历检查项目目录下每一条引用路径（包括<code>node_modules</code>）花了较多时间。<br>
+ </p>
+<h3 id="2针对性的选择优化方案">2.针对性的选择优化方案：</h3>
+<p> <br>
+<code>cra</code>已经内置了一些常规的<code>webpack</code>优化配置，在检查了<code>cra</code>默认的<code>webpack</code>配置后，针对上一步的分析结果，发现仍然有一些可操作的的余地:<br>
+ </p>
+<ol>
+<li>首先是<code>CaseSensitivePathsPlugin</code>这个插件。<br>
+这个插件的主要作用是扫描项目中的文件地址，是否存在大小写不一致的地方导致开发环境下失去对代码更改的监听，从而没有自动重新编译，see <a href="https://github.com/facebook/create-react-app/issues/240">issue</a>。但是缺点在于这个插件会扫描项目中全部的路径，包括<code>node_modules</code>，看了下这个插件的源码，并不支持自定义检查路径，这就比较因噎废食了，<code>next</code>项目就因为这个问题，在<code>8.0.4</code>以后就去除了该插件，see <a href="https://github.com/vercel/next.js/issues/6927">issue</a>。所以不难想到在配置中默认禁用该插件，如果出现了类似问题再开启该插件进行检查。</li>
+<li>针对<code>babel-loader</code>转义时间过长的问题：可以添加<code>thread-loader</code>开启多线程加速</li>
+<li>针对<code>css</code>代码编译&amp;预处理时间过长的问题：同 <code>babel-loader</code>，可以开多线程加速<br>
+ </li>
+</ol>
+<h3 id="3修改配置测试">3.修改配置&amp;测试</h3>
+<p> <br>
+覆盖<code>cra</code>的<code>webpack</code>需要使用到<code>react-app-rewired</code>/<code>customiza-cra</code>等插件，这个需要看一下对应的文档，修改根目录下的<code>config-overrides.js</code>，简单配置及测试后得到如下结果：<br>
+ <br>
+注：经测试<code>thead-loader</code>对<code>less</code>文件的一系列<code>loader</code>没有加速效果，根据<code>thread-loader</code>的官方文档说明，可能是由于<code>webpack</code>的机制所限：<br>
+ <br>
+运行<code>start</code>本地起开发服务（不给<code>less</code>系列<code>loader</code>开多线程）<br>
+<img src="https://ae01.alicdn.com/kf/U54877ec802064ff79f2c6fa4c9f690e7F.jpg" alt="" loading="lazy"><br>
+ <br>
+运行<code>start</code>本地起开发服务（给<code>less</code>系列<code>loader</code>开多线程）<br>
+<img src="https://ae01.alicdn.com/kf/U89cd0f5e3c8f409e91699a84204c535ae.jpg" alt="" loading="lazy"><br>
+ <br>
+运行<code>build</code>输出构建包（不给<code>less</code>系列<code>loader</code>开多线程）<br>
+<img src="https://ae01.alicdn.com/kf/U4cb1734ca69a4f54a7b3d667e8f50f19m.jpg" alt="" loading="lazy"><br>
+ <br>
+<code>build</code>情况下加速不明显，查阅<code>cra</code>默认的<code>webpack</code>配置可以发现，在<code>production</code>模式下，<code>cra</code>使用了<code>WorkboxWebpackPlugin</code>开了一个<code>service worker</code>来加速打包，起到了和<code>thread-loader</code>相同的效果，而并行加速的特点是边际效益递减，因此二者叠加并没有明显的效果提升（当然也可能是由于其他的原因🤣），所以，<code>production</code>模式下可不开启<code>thread-loader</code>.<br>
+ </p>
+<h2 id="结论">结论</h2>
+<p> <br>
+针对开发环境构建时开启<code>thread-loader</code>，同时默认不起用<code>CaseSensitivePathsPlugin</code>，构建时间可缩短一半左右</p>
+</p>
+
+     <p class="md_block">
+    <div class="reward"><div class="reward-button">赏 <span class="reward-code"> <span class="alipay-code"> <img class="alipay-img" src="https://fanqidi.github.io/media/images/alipay.png"><b>支付宝扫码打赏</b> </span> <span class="wechat-code"> <img class="wechat-img" src="https://fanqidi.github.io/media/images/wechat.png"><b>微信打赏</b> </span> </span></div></div>
+</p> 
+</div>
+
+</div>
+
+
+
+<link href="https://fanqidi.github.io/styles/main.css" type="text/css" rel="stylesheet"/>
+
+<div class="doc_comments">
+
+          
+			  
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'fanqidi',
+  apikey: 'vdCvDSoWxt5KJRQ4pwgAyqdJAl5CVxbSx8t3ytzmBrrWmoNel4gfW3G15AQoioX0',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+</div>
+
+
+
+  </div>
+</div>
+
+
+
+      </div>
+
+
+
+
+    </div>
+
+   <div class="footer">
+<link href="https://fanqidi.github.io/styles/main.css" type="text/css" rel="stylesheet"/><div class="site_footer_wrap"><div class="site_footer">
+
+      <div class="mysocials"><div class="my_socials">
+		   
+			   
+    
+			   
+    
+			   
+    
+			   
+    
+</div><link href="https://fanqidi.github.io/styles/main.css" type="text/css" rel="stylesheet"/>
+
+      </div>
+
+      <div class="copyright"><a href="https://www.fanqidi.com" target="_blank">大愚乌托邦</a>
+      </div>
+
+</div></div>
+
+    </div>
+
+
+<style type="text/css">a.back_to_top {
+    text-decoration: none;
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+    background: #f0f0f0;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    line-height: 36px;
+    font-size: 18px;
+    text-align: center;
+    transition-duration: .5s;
+    transition-propety: background-color;
+    display: none;
+}
+
+a.back_to_top span {
+    color: #888;
+}
+
+a.back_to_top:hover {
+    cursor: pointer;
+    background: #dfdfdf;
+}
+
+a.back_to_top:hover span {
+    color: #555;
+}
+
+@media print, screen and (max-width: 580px) {
+    .back_to_top {
+        display: none !important;
+    }
+}
+
+
+
+</style><a id="back_to_top" href="#" class="back_to_top"><span>△</span>
+</a>
+<script type="text/javascript" src="https://fanqidi.github.io/media/scripts/jquery.js"></script>
+
+<script>$(document).ready((function(_this) {
+  return function() {
+    var bt;
+    bt = $('#back_to_top');
+    if ($(document).width() > 480) {
+      $(window).scroll(function() {
+        var st;
+        st = $(window).scrollTop();
+        if (st > 30) {
+          return bt.css('display', 'block');
+        } else {
+          return bt.css('display', 'none');
+        }
+      });
+      return bt.click(function() {
+        $('body,html').animate({
+          scrollTop: 0
+        }, 800);
+        return false;
+      });
+    }
+  };
+})(this));
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,390 @@
+
+<html>
+  <head lang="zh">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+        <meta content="yes" name="apple-mobile-web-app-capable"/>
+        <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+        <meta content="telephone=no" name="format-detection"/>
+        <meta name="renderer" content="webkit">
+    <title>使用 crontab 定时备份数据 | 大愚乌托邦</title>
+<link href="https://fanqidi.github.io/styles/main.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="https://fanqidi.github.io/media/scripts/jquery.js"></script>
+<script type="text/javascript" src="https://fanqidi.github.io/media/scripts/basic.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </head>
+
+  <body>
+     <div class="header">
+      <div class="logo_title">
+		  
+        <div class="title animated fadeInDown"><img src="https://fanqidi.github.io/images/avatar.png?v=1714889770369"/>
+
+          <h1 title="大愚乌托邦" class="weaklink"><a href="/">大愚乌托邦</a>
+
+          </h1>
+
+          <div class="navbar weaklink">
+            <div class="normal_nav">
+
+<div class="bitcron_nav_container">
+
+
+  <div class="bitcron_nav">
+    <div class="mixed_site_nav_wrap site_nav_wrap">
+		
+      <ul class="mixed_site_nav site_nav sm sm-base">
+ 
+  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a>
+
+  </li>
+ 
+  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a>
+
+  </li>
+ 
+  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a>
+
+  </li>
+ 
+
+      </ul>
+
+      <div class="clear clear_nav_inline_end"></div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="clear clear_nav_end"></div>
+
+</div>
+
+            </div>
+
+            <div class="hamberger"><i class="fa fa-bars"></i>
+<i class="fa fa-times"></i>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="hidden_nav animated fadeInDown">
+
+<div class="bitcron_nav_container">
+
+
+  <div class="bitcron_nav">
+    <div class="mixed_site_nav_wrap site_nav_wrap">
+      <ul class="mixed_site_nav site_nav sm sm-base">
+		  
+	
+  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a>
+
+  </li>
+
+
+  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a>
+
+  </li>
+
+
+  <li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a>
+
+  </li>
+
+
+
+
+
+      </ul>
+
+      <div class="clear clear_nav_inline_end"></div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="clear clear_nav_end"></div>
+
+</div>
+
+      </div>
+
+    </div>
+
+
+    <div class="main">
+      <div class="main-inner">
+
+
+<div class="content">
+
+
+
+
+
+
+  <div class="post_page" >
+
+<div class="post">
+  <div class="post_title sm_margin">
+    <h2><a>使用 crontab 定时备份数据</a>
+
+
+
+    </h2>
+  </div>
+
+  <div class="post_details">
+    <div class="info"><i class="fa fa-clock-o"></i>
+<span class="date_info">2024-03-03</span>
+<i class="fa fa-eye"></i>
+
+<span class="date_info"><span id="busuanzi_value_page_pv"></span> Views</span>
+
+
+<i class="fa fa-bookmark-o"></i>
+<span class="tags_info weaklink">
+	
+	<a href="https://fanqidi.github.io/tag/3e_S6nf6s/" class="tag">backup</a>
+
+	<a href="https://fanqidi.github.io/tag/iuL2K3Q8tR/" class="tag">crontab</a>
+
+	<a href="https://fanqidi.github.io/tag/mt6FJiYFw/" class="tag">tech</a>
+
+
+</span>
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="post_content markdown"><p class="md_block">
+    <span class="md_line md_line_start md_line_end"><p>最近优化了一下数据备份的流程，尝试把一些步骤使用 <code>crontab</code> 自动化起来。</p>
+<!-- more -->
+<p>我一直有定期备份数据的习惯，备份的具体流程也在不断迭代，前段时间把一部分备份步骤写成了脚本，定期通过快捷键调用，这两天觉得手动调用的这一步也可以自动化，所以想到了 <code>crontab</code>。<br>
+之前只在使用 <code>GitHub Action</code> 的时候接触过 <code>crontab</code>，没有太具体了解过，所以打算这次也一并实践一下。<br>
+原来的数据备份流程如下：</p>
+<ol>
+<li>运行一个脚本，脚本执行以下内容：<br>
+1. 运行<code>brew dump</code> 导出<code>Brewfile</code>到根目录；<br>
+2. 连同根目录下的其他值得备份的文件，一起上传到指定地点；<br>
+3. 根据日期创建文件夹，把前述的<code>Brewfile</code>和其他值得备份的文件放进去；</li>
+<li>手动导出 <code>bitwarden</code> 和 <code>raycast</code> 的数据到前面创建的文件夹；</li>
+<li>把文件夹复制到移动硬盘里；</li>
+</ol>
+<p>这个流程除了最后两步需要手动操作，前面的脚本部分每次通过快捷键调用一下，也是这一次优化的主要部分。</p>
+<p>初步思路是写一个 <code>cron</code> 配置，定时执行备份脚本，例如这样：</p>
+<pre><code class="language-shell">14 12 * * 0 /path/to/backup.sh
+</code></pre>
+<p>为了测试，把时间设置为下一分钟，结果过了一会没动静，搜索了一下，可能是权限问题，这个好说，简单处理了一下，更新 <code>cron</code> 配置再来，但还是啥也没有。<br>
+这时候我有两个问题：</p>
+<ol>
+<li>脚本有没有按照预期运行？</li>
+<li>如何验证运行结果？</li>
+</ol>
+<p>前一个容易验证，关键是后一个，我又看了一下设置日志输出的方法，将 <code>cron</code> 表达式调整为：</p>
+<pre><code class="language-shell">14 12 * * 0 /path/to/backup.sh &gt;&gt; /path/to/backup.log 2&gt;&amp;1
+</code></pre>
+<p>更新时间后等了一会，还是什么都没有，我眉头一皱，有点不对劲。又到网上冲了一会浪，决定试试重启电脑。<br>
+重开后先进终端检查一下 <code>cron</code> 配置对不对，结果一打开终端发现有个提示：</p>
+<pre><code class="language-shell">you have mail
+</code></pre>
+<p>这是啥？为啥会在这里？如果是电子邮件为啥不到我邮箱？<br>
+疑问过后还是得挨个分析，首先我的疑问点如下：</p>
+<ol>
+<li>这个显然是提示我有<code>mail</code>，但是这个 <code>mail</code> 去哪里看？检查了邮箱并没有;</li>
+<li>既然是<code>mail</code>，能不能配置自己邮箱接收？</li>
+</ol>
+<p>疑问归疑问，我的主线任务仍然是 <code>cron</code> 配置的问题，这个<code>you have mail</code>的问题可以后面再说。<br>
+不过沿着这条线研究了一会，发现了 <code>cron</code> 的输出信息是以 mail 的写入到了 <code>/var/mail/[username]</code>这个文件里，并在终端进行提示。(这是系统默认的程序运行输出机制，后面又去补了一下课)</p>
+<p>有了输出信息，事情就踏上了快车道，可以根据输出信息一步一步调试了，下面简述一下遇到的问题以及解决方案</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>解决方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>operation not permitted</td>
+<td>full-disk permission ( asked in modal)</td>
+</tr>
+<tr>
+<td>brew command not found</td>
+<td>配置环境变量</td>
+</tr>
+<tr>
+<td>add PATH but no</td>
+<td>path is different for m1 mac</td>
+</tr>
+</tbody>
+</table>
+<p>最后的一些问题解决起来比较常规，基本是一些程序执行上的权限问题，因为 <code>cron</code> 在运行脚本时的环境和自己手动运行是不一致的，这个也需要补一下操作系统的课。</p>
+<p>（这里补充一下前面关于 <code>you have mail</code> 的信息，可以通过在根目录下新建一个<code>.forward</code>文件来对 <code>/var/mail/[username]</code> 里的邮件执行自动转发，注意<code>.forward</code>文件应该只包含邮箱地址）</p>
+<p>最后，总结一下。这次升级简化了备份流程，顺便也提高了自动备份的频率，中途遇到了一些意料之外的操作系统和权限的问题，中途一度毫无头绪，不过最后还是顺利解决了。</p>
+</p>
+
+     <p class="md_block">
+    <div class="reward"><div class="reward-button">赏 <span class="reward-code"> <span class="alipay-code"> <img class="alipay-img" src="https://fanqidi.github.io/media/images/alipay.png"><b>支付宝扫码打赏</b> </span> <span class="wechat-code"> <img class="wechat-img" src="https://fanqidi.github.io/media/images/wechat.png"><b>微信打赏</b> </span> </span></div></div>
+</p> 
+</div>
+
+</div>
+
+
+
+<link href="https://fanqidi.github.io/styles/main.css" type="text/css" rel="stylesheet"/>
+
+<div class="doc_comments">
+
+          
+			  
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'fanqidi',
+  apikey: 'vdCvDSoWxt5KJRQ4pwgAyqdJAl5CVxbSx8t3ytzmBrrWmoNel4gfW3G15AQoioX0',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+</div>
+
+
+
+  </div>
+</div>
+
+
+
+      </div>
+
+
+
+
+    </div>
+
+   <div class="footer">
+<link href="https://fanqidi.github.io/styles/main.css" type="text/css" rel="stylesheet"/><div class="site_footer_wrap"><div class="site_footer">
+
+      <div class="mysocials"><div class="my_socials">
+		   
+			   
+    
+			   
+    
+			   
+    
+			   
+    
+</div><link href="https://fanqidi.github.io/styles/main.css" type="text/css" rel="stylesheet"/>
+
+      </div>
+
+      <div class="copyright"><a href="https://www.fanqidi.com" target="_blank">大愚乌托邦</a>
+      </div>
+
+</div></div>
+
+    </div>
+
+
+<style type="text/css">a.back_to_top {
+    text-decoration: none;
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+    background: #f0f0f0;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    line-height: 36px;
+    font-size: 18px;
+    text-align: center;
+    transition-duration: .5s;
+    transition-propety: background-color;
+    display: none;
+}
+
+a.back_to_top span {
+    color: #888;
+}
+
+a.back_to_top:hover {
+    cursor: pointer;
+    background: #dfdfdf;
+}
+
+a.back_to_top:hover span {
+    color: #555;
+}
+
+@media print, screen and (max-width: 580px) {
+    .back_to_top {
+        display: none !important;
+    }
+}
+
+
+
+</style><a id="back_to_top" href="#" class="back_to_top"><span>△</span>
+</a>
+<script type="text/javascript" src="https://fanqidi.github.io/media/scripts/jquery.js"></script>
+
+<script>$(document).ready((function(_this) {
+  return function() {
+    var bt;
+    bt = $('#back_to_top');
+    if ($(document).width() > 480) {
+      $(window).scroll(function() {
+        var st;
+        st = $(window).scrollTop();
+        if (st > 30) {
+          return bt.css('display', 'block');
+        } else {
+          return bt.css('display', 'none');
+        }
+      });
+      return bt.click(function() {
+        $('body,html').animate({
+          scrollTop: 0
+        }, 800);
+        return false;
+      });
+    }
+  };
+})(this));
+</script>
+
+</body>
+
+</html>

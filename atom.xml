@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://fanqidi.github.io</id>
+    <title>大愚乌托邦</title>
+    <updated>2024-05-05T06:16:15.683Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://fanqidi.github.io"/>
+    <link rel="self" href="https://fanqidi.github.io/atom.xml"/>
+    <subtitle>无处可去，当个观众</subtitle>
+    <logo>https://fanqidi.github.io/images/avatar.png</logo>
+    <icon>https://fanqidi.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2024, 大愚乌托邦</rights>
+    <entry>
+        <title type="html"><![CDATA[使用 crontab 定时备份数据]]></title>
+        <id>https://fanqidi.github.io/post/scheduling-backup-using-cron/</id>
+        <link href="https://fanqidi.github.io/post/scheduling-backup-using-cron/">
+        </link>
+        <updated>2024-03-03T15:55:14.000Z</updated>
+        <summary type="html"><![CDATA[<p>最近优化了一下数据备份的流程，尝试把一些步骤使用 <code>crontab</code> 自动化起来。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>最近优化了一下数据备份的流程，尝试把一些步骤使用 <code>crontab</code> 自动化起来。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[记账的演变之旅]]></title>
+        <id>https://fanqidi.github.io/post/accounting/</id>
+        <link href="https://fanqidi.github.io/post/accounting/">
+        </link>
+        <updated>2023-03-05T07:33:35.000Z</updated>
+        <summary type="html"><![CDATA[<p>不知不觉已经保持了很多年的记账习惯，中间做过一些调整，不断在追问和尝试中寻找每一个阶段更合适自己的记账方法</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>不知不觉已经保持了很多年的记账习惯，中间做过一些调整，不断在追问和尝试中寻找每一个阶段更合适自己的记账方法</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[《置身事内》读书笔记]]></title>
+        <id>https://fanqidi.github.io/post/IVDFeaa8f/</id>
+        <link href="https://fanqidi.github.io/post/IVDFeaa8f/">
+        </link>
+        <updated>2022-10-17T01:30:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>公司周会分享邀请，正好分享最近读《置身事内》的收获，这是准备的逐字稿</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>公司周会分享邀请，正好分享最近读《置身事内》的收获，这是准备的逐字稿</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[[译] 有 20 年经验的程序员的 20 条人生经验]]></title>
+        <id>https://fanqidi.github.io/post/pG6J3WPnq/</id>
+        <link href="https://fanqidi.github.io/post/pG6J3WPnq/">
+        </link>
+        <updated>2022-05-24T12:58:13.000Z</updated>
+        <summary type="html"><![CDATA[<p>最近读到一位 20 年“老程序员”的经验分享，对其中的很多点都非常赞同，翻译在这里，权当做笔记了。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>最近读到一位 20 年“老程序员”的经验分享，对其中的很多点都非常赞同，翻译在这里，权当做笔记了。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[邮箱 "All in one" —— Cloudflare Email Routing]]></title>
+        <id>https://fanqidi.github.io/post/Cloudflare-Email-Routing/</id>
+        <link href="https://fanqidi.github.io/post/Cloudflare-Email-Routing/">
+        </link>
+        <updated>2022-04-20T13:35:34.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>利用 cloudflare 的 email routing 功能让自己拥有无限数量的邮箱</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>利用 cloudflare 的 email routing 功能让自己拥有无限数量的邮箱</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一劳永逸解决跨域问题 —— Use Cloudflare Worker as MitM]]></title>
+        <id>https://fanqidi.github.io/post/cloudflare-mitm/</id>
+        <link href="https://fanqidi.github.io/post/cloudflare-mitm/">
+        </link>
+        <updated>2022-04-03T06:13:11.000Z</updated>
+        <summary type="html"><![CDATA[<p>一种通用的解决浏览器跨域请求的方法</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>一种通用的解决浏览器跨域请求的方法</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[职场三俗行为]]></title>
+        <id>https://fanqidi.github.io/post/fuk-u-i-quit/</id>
+        <link href="https://fanqidi.github.io/post/fuk-u-i-quit/">
+        </link>
+        <updated>2022-03-27T08:58:39.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>一切不以互相尊重为基础的职场行为</p>
+</blockquote>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>一切不以互相尊重为基础的职场行为</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React 项目的打包优化]]></title>
+        <id>https://fanqidi.github.io/post/cra-accelerate/</id>
+        <link href="https://fanqidi.github.io/post/cra-accelerate/">
+        </link>
+        <updated>2021-05-01T05:51:49.000Z</updated>
+        <summary type="html"><![CDATA[<p>本文介绍基于 <code>create-react-app</code>的 <code>react</code>项目的编译优化经验，成功将编译打包时间由 <code>2 min 20 s</code> 左右降低至 <code>1 min 20 s</code> 左右</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>本文介绍基于 <code>create-react-app</code>的 <code>react</code>项目的编译优化经验，成功将编译打包时间由 <code>2 min 20 s</code> 左右降低至 <code>1 min 20 s</code> 左右</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一种数据驱动的 debug 思路]]></title>
+        <id>https://fanqidi.github.io/post/nxryld17R/</id>
+        <link href="https://fanqidi.github.io/post/nxryld17R/">
+        </link>
+        <updated>2021-03-22T13:13:08.000Z</updated>
+        <summary type="html"><![CDATA[<p>有时候遇到bug，时间上来不及找到bug出现的原因，这时候从数据驱动的角度出发，也许能另辟蹊径。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>有时候遇到bug，时间上来不及找到bug出现的原因，这时候从数据驱动的角度出发，也许能另辟蹊径。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[深度优先，还是 广度优先？]]></title>
+        <id>https://fanqidi.github.io/post/life-choice/</id>
+        <link href="https://fanqidi.github.io/post/life-choice/">
+        </link>
+        <updated>2021-03-20T12:24:41.000Z</updated>
+        <summary type="html"><![CDATA[<p>“深度优先”和“广度优先”是遍历树/图中的算法名词，本文借用这两个概念，来表达对学习方法的个人看法。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>“深度优先”和“广度优先”是遍历树/图中的算法名词，本文借用这两个概念，来表达对学习方法的个人看法。</p>
+]]></content>
+    </entry>
+</feed>
